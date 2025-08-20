@@ -18,7 +18,7 @@ const TodoList = ({
 
     const filtered = todos.filter(t => (filter === 'all' ? true : filter === 'active' ? !t.done : t.done))
 
-    if (filtered.length === 0) return <p className="mt-3 text-sm opacity-70">No todos yet — add one above.</p>
+    if (filtered.length === 0) return <p className="mt-3 text-sm opacity-70">No tasks added yet — add one above.</p>
 
     return (
         <ul className="mt-3 space-y-2">
