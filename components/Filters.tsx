@@ -46,7 +46,7 @@ const Filters = () => {
             Clear All
           </button>
           <button className="px-2 py-1 text-xs bg-orange-200 hover:bg-orange-300 rounded transition-colors" 
-            onClick={clearAll}>
+            onClick={clearCompleted}>
             Clear Completed
           </button>
         </div>

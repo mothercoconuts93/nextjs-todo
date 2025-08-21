@@ -14,6 +14,8 @@ const TodoList = () => {
       if (filter === "all")
         return true
       if (filter === "active")
+        return !todo.completed
+      if (filter === "completed")
         return todo.completed
     })
 
