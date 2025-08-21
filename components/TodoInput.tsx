@@ -1,15 +1,19 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useTodoStore } from '@/store/store'
 
-const TodoInput = ({ onAdd }: { onAdd: (text: string) => void }) => {
+const TodoInput = () => {
     const [text, setText] = useState("")
+
+    const addTodo = useTodoStore(state => state.addTodo)
 
     function submit(e?: React.FormEvent) {
         e?.preventDefault()
         const v = text.trim()
         if (!v) return
-        onAdd(v)
+        
+        addTodo(v)
         setText('')
     }
 

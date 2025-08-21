@@ -2,29 +2,34 @@
 
 import React from 'react'
 import TodoItem from './TodoItem'
-import type { Todo } from './types' 
+import { useTodoStore } from '@/store/store'
 
-const TodoList = ({
-  todos,
-  filter,
-  onToggle,
-  onDelete,
-}: {
-  todos: Todo[]
-  filter: 'all' | 'active' | 'completed'
-  onToggle: (id: string) => void
-  onDelete: (id: string) => void
-}) => {
+const TodoList = () => {
 
-    const filtered = todos.filter(t => (filter === 'all' ? true : filter === 'active' ? !t.done : t.done))
+    const todos = useTodoStore(state => state.todos)
+    const filter = useTodoStore(state => state.filter)
 
-    if (filtered.length === 0) return <p className="mt-3 text-sm opacity-70">No tasks added yet — add one above.</p>
+
+    const filteredTodos = todos.filter(todo => {
+      if (filter === "all")
+        return true
+      if (filter === "active")
+        return todo.completed
+    })
+
+    if (filteredTodos.length === 0)  {
+      return <p className="mt-3 text-sm opacity-70">
+        No tasks added yet — add one above.</p>
+    }
 
     return (
         <ul className="mt-3 space-y-2">
-        {filtered.map(todo => (
-            <TodoItem key={todo.id} todo={todo} onToggle={onToggle} onDelete={onDelete} />
-        ))}
+          {filteredTodos.map(todo => (
+              <TodoItem 
+                key={todo.id} 
+                todo={todo}
+            />
+          ))}
         </ul>
     )
 }
